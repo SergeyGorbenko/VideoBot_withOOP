@@ -2,9 +2,25 @@ import re
 import requests
 import telebot
 import time
+import os
 
 from bot import bussines
 from bot import constants
+
+
+def check_presence_files():
+    try:
+        open(constants.videos_list)
+        open(constants.priority_list)
+        open(constants.admins)
+    except FileNotFoundError:
+        os.mkdir(constants.data)
+        open(constants.videos_list, 'w')
+        open(constants.priority_list, 'w')
+        open(constants.admins, 'w')
+
+
+check_presence_files()
 
 bot = bussines.Conversation.Bot = telebot.TeleBot(constants.token)
 
