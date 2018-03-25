@@ -14,10 +14,13 @@ def check_presence_files():
         open(constants.priority_list)
         open(constants.admins)
     except FileNotFoundError:
-        os.mkdir(constants.data)
-        open(constants.videos_list, 'w')
-        open(constants.priority_list, 'w')
-        open(constants.admins, 'w')
+        try:
+            os.mkdir(constants.data)
+        except FileExistsError:
+            pass
+        open(constants.videos_list, 'a')
+        open(constants.priority_list, 'a')
+        open(constants.admins, 'a')
 
 
 check_presence_files()
